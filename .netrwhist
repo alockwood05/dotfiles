@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/alexanderlockwood/git'
+let g:netrw_dirhist_2='/Users/alexanderlockwood/git/earnest/earnest'
+let g:netrw_dirhist_3='/Users/alexanderlockwood/git/earnest'
+let g:netrw_dirhist_4='/Users/alexanderlockwood/git'
+let g:netrw_dirhist_5='/Users/alexanderlockwood'
+let g:netrw_dirhist_6='/Users/alexanderlockwood/git/earnest/earnest'
+let g:netrw_dirhist_7='/Users/alexanderlockwood/git/earnest'
+let g:netrw_dirhist_8='/Users/alexanderlockwood/git'
+let g:netrw_dirhist_9='/Users/alexanderlockwood'
