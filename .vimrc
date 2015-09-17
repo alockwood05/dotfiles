@@ -1,8 +1,16 @@
 set nocompatible " VIMproved
 filetype off                  " required
 
-" Vundle Plugin Management
+" ===========================
+" vim-multiple-cursors
+" ===========================
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-N>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
 
+" Vundle Plugin Management
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim' " required
@@ -15,6 +23,7 @@ Plugin 'git@github.com:skammer/vim-css-color'
 Plugin 'git@github.com:scrooloose/syntastic'
 Plugin 'git@github.com:airblade/vim-gitgutter'
 Plugin 'git@github.com:editorconfig/editorconfig-vim'
+Plugin 'git@github.com:terryma/vim-multiple-cursors'
 " Colors
 Plugin 'git@github.com:flazz/vim-colorschemes'
 Plugin 'git@github.com:/grod/grod-vim-colors'
@@ -37,7 +46,6 @@ set backspace=indent,eol,start
 syntax on
 colorscheme Monokai
 colorscheme dobdark
-colorscheme sourcerer
 set enc=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf8,prc
@@ -67,7 +75,7 @@ nnoremap <C-H> <C-W><C-H> "Ctrl-h to move left a split
 " ===========================
 map <leader>rr :source ~/.vimrc<CR> "\rr reloads .vimrc
 map <leader>wd cd %:p:h<CR>" \wd sets current file as cwd
-map <C-N> :NERDTreeToggle<CR>
+map <leader>nt :NERDTreeToggle<CR>
 nmap <leader>t :%s/\s\+$<CR>
 " \bd deletes this buffer selects new buffer in window \bd deletes this buffer selects new buffer
 map <leader>bq :bp<bar>sp<bar>bn<bar>bd<CR>
@@ -87,14 +95,15 @@ let g:syntastic_javascript_checkers = ["eslint", "jshint"]
 " ===========================
 nmap <leader>gg :GitGutterToggle<CR>
 nmap <leader>gh :GitGutterLineHighlightsToggle<CR>
-nmap <Leader>hs :GitGutterStageHunk
-nmap <Leader>hr :GitGutterRevertHunk
-nmap [h <Plug>GitGutterPrevHunk
-nmap ]h <Plug>GitGutterNextHunk
+nmap <Leader>hs :GitGutterStageHunk<CR>
+nmap <Leader>hr :GitGutterRevertHunk<CR>
+nmap [h <Plug>GitGutterPrevHunk<CR>
+nmap ]h <Plug>GitGutterNextHunk<CR>
 
 " ===========================
 " Airline
 " ===========================
+set laststatus=2
 let g:airline_detect_modified=1
 let g:airline_detect_iminsert=1
 let g:airline#extensions#tabline#enabled = 1
@@ -102,6 +111,42 @@ let g:airline_left_sep='▶'
 let g:airline_right_sep='◀'
 let g:airline_inactive_collapse=0
 let g:airline_powerline_fonts=1
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = ''
+
+" old vim-powerline symbols
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
 
 " ===========================
 " Buffer Tabbing
@@ -115,3 +160,4 @@ nmap ]b :bn<CR>
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](bower_components|node_modules|false|\.build|\.tmp)$'
   \ }
+
