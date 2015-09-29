@@ -5,10 +5,6 @@ filetype off                  " required
 " vim-multiple-cursors
 " ===========================
 let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
 
 " Vundle Plugin Management
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -16,19 +12,21 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim' " required
 Plugin 'git@github.com:kien/ctrlp.vim'
 Plugin 'git@github.com:scrooloose/nerdtree'
-Plugin 'git@github.com:mileszs/ack.vim'
+" Plugin 'git@github.com:mileszs/ack.vim'
+Plugin 'git@github.com:dahu/vim-lotr'
+Plugin 'git@github.com:junegunn/goyo.vim'
 Plugin 'git@github.com:bling/vim-airline'
 Plugin 'git@github.com:pangloss/vim-javascript'
+Plugin 'git@github.com:jelera/vim-javascript-syntax'
 Plugin 'git@github.com:skammer/vim-css-color'
 Plugin 'git@github.com:scrooloose/syntastic'
 Plugin 'git@github.com:airblade/vim-gitgutter'
 Plugin 'git@github.com:editorconfig/editorconfig-vim'
-Plugin 'git@github.com:terryma/vim-multiple-cursors'
+Plugin 'git@github.com:Valloric/YouCompleteMe'
+Plugin 'git@github.com:tpope/vim-fugitive'
 " Colors
-Plugin 'git@github.com:flazz/vim-colorschemes'
 Plugin 'git@github.com:/grod/grod-vim-colors'
 call vundle#end()            " required
-filetype plugin indent on    " required
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update
@@ -41,23 +39,33 @@ filetype plugin indent on    " required
 " ===========================
 " Basics
 " ==========================
-
+filetype plugin indent on    " required
+set number
+set hlsearch
 set backspace=indent,eol,start
 syntax on
-colorscheme Monokai
-colorscheme dobdark
+
+" remove any trailing whitespace that is in the file
+autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+
+" colors
+set background=dark
+set t_Co=256
+colorscheme smyck
+"char length 100
+highlight OverLength ctermbg=red ctermfg=white guibg=darkred
+match OverLength /\%101v.\+/
+
 set enc=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf8,prc
-filetype plugin indent on
-set number
 set hidden " Allow hidden buffers
 set backupdir=~/.vim-tmp/
 set directory=~/.vim-tmp/
 
 " don't need to press escape key
 inoremap jk <Esc>
-inoremap jk <Esc>
+cnoremap jk <Esc>
 
 " ===========================
 " splits
@@ -65,10 +73,12 @@ inoremap jk <Esc>
 set splitbelow
 set splitright
 
-nnoremap <C-J> <C-W><C-J> "Ctrl-j to move down a split
-nnoremap <C-K> <C-W><C-K> "Ctrl-k to move up a split
-nnoremap <C-L> <C-W><C-L> "Ctrl-l to move    right a split
-nnoremap <C-H> <C-W><C-H> "Ctrl-h to move left a split
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap ]w <C-W><C-L>
+nnoremap [w <C-W><C-H>
 
 " ===========================
 " misc
@@ -76,19 +86,14 @@ nnoremap <C-H> <C-W><C-H> "Ctrl-h to move left a split
 map <leader>rr :source ~/.vimrc<CR> "\rr reloads .vimrc
 map <leader>wd cd %:p:h<CR>" \wd sets current file as cwd
 map <leader>nt :NERDTreeToggle<CR>
-nmap <leader>t :%s/\s\+$<CR>
-" \bd deletes this buffer selects new buffer in window \bd deletes this buffer selects new buffer
-map <leader>bq :bp<bar>sp<bar>bn<bar>bd<CR>
-
-"char length 100
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%101v.\+/
 
 " ===========================
 " Syntastic Linting
 " ===========================
 map <leader>lint :SyntasticCheck
 let g:syntastic_javascript_checkers = ["eslint", "jshint"]
+hi SpellBad ctermfg=white ctermbg=red guifg=white guibg=darkred
+hi SpellCap ctermfg=white ctermbg=darkred guifg=white guibg=darkred
 
 " ===========================
 " Git Gutter
@@ -153,6 +158,8 @@ let g:airline_symbols.linenr = '⭡'
 " ===========================
 nmap [b :bp<CR>
 nmap ]b :bn<CR>
+" \bd deletes this buffer selects new buffer in window \bd deletes this buffer selects new buffer
+map <leader>bq :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " ===========================
 " CtrlP
@@ -161,3 +168,18 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](bower_components|node_modules|false|\.build|\.tmp)$'
   \ }
 
+" ===========================
+" LOTR - Lord of the regs sidebar
+" ===========================
+let g:lotr_position = 'left'
+let g:lotr_winsize = 40
+nmap <leader>r <plug>LOTRToggle<CR>
+
+
+" ===========================
+" Goyo - distraction free
+" ===========================
+let g:goyo_width = 120
+let g:goyo_linenr = 1
+map \df :Goyo<CR>
+"nmap <leader>df <plug>Goyo<CR>
