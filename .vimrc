@@ -42,6 +42,10 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 set number
 set hlsearch
+set mouse=a
+map <xCSI>[62~ <MouseDown>
+map <F11> :set invpaste<CR>
+set pastetoggle=<F11>
 set backspace=indent,eol,start
 syntax on
 
