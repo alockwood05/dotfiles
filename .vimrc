@@ -87,8 +87,8 @@ nnoremap [w <C-W><C-H>
 " ===========================
 " misc
 " ===========================
-map <leader>rr :source ~/.vimrc<CR> "\rr reloads .vimrc
-map <leader>wd cd %:p:h<CR>" \wd sets current file as cwd
+map <leader>rr :source ~/.vimrc<CR>
+map <leader>wd cd %:p:h<CR>
 map <leader>nt :NERDTreeToggle<CR>
 
 " ===========================
@@ -104,8 +104,10 @@ hi SpellCap ctermfg=white ctermbg=darkred guifg=white guibg=darkred
 " ===========================
 nmap <leader>gg :GitGutterToggle<CR>
 nmap <leader>gh :GitGutterLineHighlightsToggle<CR>
-nmap <Leader>hs :GitGutterStageHunk<CR>
-nmap <Leader>hr :GitGutterRevertHunk<CR>
+" Hunk Write
+nmap <Leader>hw :GitGutterStageHunk<CR>
+" Hunk Undo
+nmap <Leader>hu :GitGutterRevertHunk<CR>
 nmap [h <Plug>GitGutterPrevHunk<CR>
 nmap ]h <Plug>GitGutterNextHunk<CR>
 
@@ -166,12 +168,14 @@ nmap ]b :bn<CR>
 map <leader>bq :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " ===========================
-" CtrlP
+" CtrlP ctrlp ctrl-p
 " ===========================
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](bower_components|node_modules|false|\.build|\.tmp)$'
   \ }
-
+let g:ctrlp_max_files = 0
+let g:ctrlp_show_hidden = 0
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
 " ===========================
 " LOTR - Lord of the regs sidebar
 " ===========================
