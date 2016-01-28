@@ -97,7 +97,7 @@ map <leader>nt :NERDTreeToggle<CR>
 " Syntastic Linting
 " ===========================
 map <leader>lint :SyntasticCheck
-let g:syntastic_javascript_checkers = ["eslint", "jshint"]
+let g:syntastic_javascript_checkers = ["eslint"]
 hi SpellBad ctermfg=white ctermbg=red guifg=white guibg=darkred
 hi SpellCap ctermfg=white ctermbg=darkred guifg=white guibg=darkred
 
