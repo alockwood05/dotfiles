@@ -23,6 +23,8 @@ Plugin 'git@github.com:scrooloose/syntastic'
 Plugin 'git@github.com:airblade/vim-gitgutter'
 Plugin 'git@github.com:editorconfig/editorconfig-vim'
 Plugin 'git@github.com:Valloric/YouCompleteMe'
+" Commentary use `gc` motion, or `gcc` for the line `:help commentary for more`
+Plugin 'git@github.com:tpope/vim-commentary.git'
 Plugin 'git@github.com:tpope/vim-fugitive'
 " Colors
 Plugin 'git@github.com:/grod/grod-vim-colors'
