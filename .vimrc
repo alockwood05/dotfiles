@@ -189,7 +189,9 @@ nmap <leader>r <plug>LOTRToggle<CR>
 " ===========================
 " Goyo - distraction free
 " ===========================
-let g:goyo_width = 120
-let g:goyo_linenr = 1
+let g:goyo_width = 100
+let g:goyo_liner = 4
+let g:goyo_margin_top = 1
+let g:goyo_margin_bottom = 1
 map \df :Goyo<CR>
 "nmap <leader>df <plug>Goyo<CR>
