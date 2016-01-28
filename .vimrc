@@ -173,11 +173,11 @@ map <leader>bq :bp<bar>sp<bar>bn<bar>bd<CR>
 " CtrlP ctrlp ctrl-p
 " ===========================
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](bower_components|node_modules|false|\.build|\.tmp)$'
+  \ 'dir':  '\v[\/](bower_components|node_modules|false|dist|\.build|\.tmp)$'
   \ }
 let g:ctrlp_max_files = 0
 let g:ctrlp_show_hidden = 0
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:6,results:60'
 " ===========================
 " LOTR - Lord of the regs sidebar
 " ===========================
