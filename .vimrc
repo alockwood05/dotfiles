@@ -102,6 +102,7 @@ nmap <leader>pj :%!python -m json.tool<CR>
 " ===========================
 map <leader>lint :SyntasticCheck
 let g:syntastic_javascript_checkers = ["eslint"]
+let g:syntastic_javascript_eslint_exec = "./node_modules/eslint/bin/eslint.js"
 hi SpellBad ctermfg=white ctermbg=red guifg=white guibg=darkred
 hi SpellCap ctermfg=white ctermbg=darkred guifg=white guibg=darkred
 
@@ -199,3 +200,5 @@ let g:goyo_margin_top = 1
 let g:goyo_margin_bottom = 1
 map \df :Goyo<CR>
 "nmap <leader>df <plug>Goyo<CR>
+
+
