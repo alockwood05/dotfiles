@@ -22,11 +22,14 @@ Plugin 'git@github.com:skammer/vim-css-color'
 Plugin 'git@github.com:scrooloose/syntastic'
 Plugin 'git@github.com:airblade/vim-gitgutter'
 Plugin 'git@github.com:editorconfig/editorconfig-vim'
+Plugin 'kchmck/vim-coffee-script'
 Plugin 'git@github.com:Valloric/YouCompleteMe'
 " Commentary use `gc` motion, or `gcc` for the line `:help commentary for more`
 Plugin 'git@github.com:tpope/vim-commentary.git'
 Plugin 'git@github.com:tpope/vim-fugitive'
+Plugin 'git@github.com:tpope/vim-unimpaired'
 " Colors
+
 Plugin 'git@github.com:/grod/grod-vim-colors'
 call vundle#end()            " required
 " Brief help
