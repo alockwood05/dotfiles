@@ -90,8 +90,9 @@ nnoremap [w <C-W><C-H>
 " misc
 " ===========================
 map <leader>rr :source ~/.vimrc<CR>
-map <leader>wd cd %:p:h<CR>
 map <leader>nt :NERDTreeToggle<CR>
+" Pretty Print
+nmap <leader>pj :%!python -m json.tool<CR>
 
 " ===========================
 " Syntastic Linting
