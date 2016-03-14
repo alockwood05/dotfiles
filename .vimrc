@@ -56,6 +56,7 @@ syntax on
 
 " remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+autocmd InsertEnter,InsertLeave * set cul!
 
 " colors
 set background=dark
