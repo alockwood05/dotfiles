@@ -29,9 +29,8 @@ Plugin 'git@github.com:tpope/vim-commentary.git'
 Plugin 'git@github.com:tpope/vim-fugitive'
 Plugin 'git@github.com:tpope/vim-unimpaired'
 " Colors
-
 Plugin 'git@github.com:/grod/grod-vim-colors'
-call vundle#end()            " required
+call vundle#end()
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update
@@ -47,7 +46,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 set number
 set hlsearch
-set mouse=a
+
 map <xCSI>[62~ <MouseDown>
 map <F11> :set invpaste<CR>
 set pastetoggle=<F11>
@@ -66,6 +65,7 @@ colorscheme smyck
 highlight OverLength ctermbg=red ctermfg=white guibg=darkred
 match OverLength /\%101v.\+/
 
+set mouse=a
 set enc=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf8,prc
@@ -150,22 +150,13 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
 " powerline symbols
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.readonly = ''
-" let g:airline_symbols.linenr = ''
-
-" old vim-powerline symbols
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 " ===========================
 " Buffer Tabbing
@@ -201,5 +192,9 @@ let g:goyo_margin_top = 1
 let g:goyo_margin_bottom = 1
 map \df :Goyo<CR>
 "nmap <leader>df <plug>Goyo<CR>
+
+" powerline fonts requires git: powerline/fonts.git to be setup
+" set guifont=Menlo
+set guifont:Cousine\ for\ Powerline
 
 
