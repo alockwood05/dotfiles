@@ -1,5 +1,7 @@
-set nocompatible " VIMproved
-filetype off                  " required
+" VIMproved
+set nocompatible
+" Required
+filetype off
 
 " ===========================
 " vim-multiple-cursors
@@ -10,27 +12,46 @@ let g:multi_cursor_use_default_mapping=0
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim' " required
+"
+" Commentary use `gc` motion, or `gcc` for the line `:help commentary for more`
+Plugin 'git@github.com:tpope/vim-commentary.git'
+"
+" Super handing git wrapper, also alows grepping :Ggrep
+Plugin 'git@github.com:tpope/vim-fugitive'
+" Handy key bindings for tabbing through items
+Plugin 'git@github.com:tpope/vim-unimpaired'
+
+" Autocomplete not working as of right now
+" Plugin 'git@github.com:Valloric/YouCompleteMe'
+
+" find files in this project
 Plugin 'git@github.com:kien/ctrlp.vim'
+
+" Syntax hilighting
+Plugin 'git@github.com:scrooloose/syntastic'
+Plugin 'git@github.com:pangloss/vim-javascript'
+Plugin 'heavenshell/vim-jsdoc'
+Plugin 'nrocco/vim-phplint'
+Plugin 'StanAngeloff/php.vim'
+" File exploration
 Plugin 'git@github.com:scrooloose/nerdtree'
 " Plugin 'git@github.com:mileszs/ack.vim'
-Plugin 'git@github.com:dahu/vim-lotr'
+
+" Distraction free writing (unsure if I like it)
 Plugin 'git@github.com:junegunn/goyo.vim'
+
 Plugin 'git@github.com:bling/vim-airline'
-Plugin 'git@github.com:pangloss/vim-javascript'
-Plugin 'git@github.com:jelera/vim-javascript-syntax'
+Plugin 'git@github.com:elzr/vim-json'
 Plugin 'git@github.com:skammer/vim-css-color'
-Plugin 'git@github.com:scrooloose/syntastic'
 Plugin 'git@github.com:airblade/vim-gitgutter'
 Plugin 'git@github.com:editorconfig/editorconfig-vim'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'git@github.com:Valloric/YouCompleteMe'
-" Commentary use `gc` motion, or `gcc` for the line `:help commentary for more`
-Plugin 'git@github.com:tpope/vim-commentary.git'
-Plugin 'git@github.com:tpope/vim-fugitive'
-Plugin 'git@github.com:tpope/vim-unimpaired'
-" Colors
-Plugin 'git@github.com:/grod/grod-vim-colors'
+Plugin 'moll/vim-node'
+Plugin 'elixir-lang/vim-elixir'
+" used to format as I type...
+
 call vundle#end()
+
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update
@@ -53,9 +74,17 @@ set pastetoggle=<F11>
 set backspace=indent,eol,start
 syntax on
 
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+
 " remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 autocmd InsertEnter,InsertLeave * set cul!
+" enable autoread to reload any files from files when checktime is called and
+" the file is changed
+set autoread
+" add an autocmd after vim started to execute checktime for *.js files on write
+autocmd VimEnter *.js checktime
+autocmd BufWritePost *.js checktime
 
 " colors
 set background=dark
@@ -93,6 +122,9 @@ nnoremap [w <C-W><C-H>
 " ===========================
 " misc
 " ===========================
+" close location list
+noremap <Leader>c :ccl <bar> lcl<CR>
+" source vimrc
 map <leader>rr :source ~/.vimrc<CR>
 map <leader>nt :NERDTreeToggle<CR>
 " Pretty Print
@@ -101,9 +133,16 @@ nmap <leader>pj :%!python -m json.tool<CR>
 " ===========================
 " Syntastic Linting
 " ===========================
-map <leader>lint :SyntasticCheck
+map <leader>s :SyntasticCheck
+let g:syntastic_check_on_open=1
 let g:syntastic_javascript_checkers = ["eslint"]
+let g:syntastic_javascript_eslint_args = ['--fix']
 let g:syntastic_javascript_eslint_exec = "./node_modules/eslint/bin/eslint.js"
+" Vim javascript linting plugin
+let g:javascript_plugin_jsdoc = 1
+" php linting
+let g:syntastic_php_checkers = ["php"]
+
 hi SpellBad ctermfg=white ctermbg=red guifg=white guibg=darkred
 hi SpellCap ctermfg=white ctermbg=darkred guifg=white guibg=darkred
 
@@ -175,26 +214,19 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_max_files = 0
 let g:ctrlp_show_hidden = 0
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:6,results:60'
-" ===========================
-" LOTR - Lord of the regs sidebar
-" ===========================
-let g:lotr_position = 'left'
-let g:lotr_winsize = 40
-nmap <leader>r <plug>LOTRToggle<CR>
-
-
-" ===========================
-" Goyo - distraction free
-" ===========================
-let g:goyo_width = 100
-let g:goyo_liner = 4
-let g:goyo_margin_top = 1
-let g:goyo_margin_bottom = 1
-map \df :Goyo<CR>
-"nmap <leader>df <plug>Goyo<CR>
 
 " powerline fonts requires git: powerline/fonts.git to be setup
 " set guifont=Menlo
 set guifont:Cousine\ for\ Powerline
 
+" https://github.com/StanAngeloff/php.vim
+" function! PhpSyntaxOverride()
+"   hi! def link phpDocTags  phpDefine
+"   hi! def link phpDocParam phpType
+" endfunction
+
+" augroup phpSyntaxOverride
+"   autocmd!
+"   autocmd FileType php call PhpSyntaxOverride()
+" augroup END
 
