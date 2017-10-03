@@ -1,5 +1,5 @@
-# .dotfiles
+# Dotfiles
 Storing some configuration
 
-## .zshrc
-## .vimrc
+For now it's just my vimrc for the most part.  
+
