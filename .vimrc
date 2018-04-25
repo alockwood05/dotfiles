@@ -8,49 +8,53 @@ filetype off
 " ===========================
 let g:multi_cursor_use_default_mapping=0
 
-" Vundle Plugin Management
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim' " required
-"
+" vim-plug Plugin Management
+call plug#begin('~/.vim/plugged')
+
 " Commentary use `gc` motion, or `gcc` for the line `:help commentary for more`
-Plugin 'git@github.com:tpope/vim-commentary.git'
+Plug 'git@github.com:tpope/vim-commentary.git'
 "
 " Super handing git wrapper, also alows grepping :Ggrep
-Plugin 'git@github.com:tpope/vim-fugitive'
+Plug 'git@github.com:tpope/vim-fugitive'
 " Handy key bindings for tabbing through items
-Plugin 'git@github.com:tpope/vim-unimpaired'
+Plug 'git@github.com:tpope/vim-unimpaired'
 
 " Autocomplete not working as of right now
-" Plugin 'git@github.com:Valloric/YouCompleteMe'
+" Plug 'git@github.com:Valloric/YouCompleteMe'
 
 " find files in this project
-Plugin 'git@github.com:kien/ctrlp.vim'
+Plug 'git@github.com:kien/ctrlp.vim'
 
 " Syntax hilighting
-Plugin 'git@github.com:scrooloose/syntastic'
-Plugin 'git@github.com:pangloss/vim-javascript'
-Plugin 'heavenshell/vim-jsdoc'
-Plugin 'nrocco/vim-phplint'
-Plugin 'StanAngeloff/php.vim'
+Plug 'git@github.com:scrooloose/syntastic'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'git@github.com:pangloss/vim-javascript'
+Plug 'heavenshell/vim-jsdoc'
+Plug 'nrocco/vim-phplint'
+Plug 'StanAngeloff/php.vim'
 " File exploration
-Plugin 'git@github.com:scrooloose/nerdtree'
-" Plugin 'git@github.com:mileszs/ack.vim'
+Plug 'git@github.com:scrooloose/nerdtree'
+" Plug 'git@github.com:mileszs/ack.vim'
 
 " Distraction free writing (unsure if I like it)
-Plugin 'git@github.com:junegunn/goyo.vim'
+Plug 'git@github.com:junegunn/goyo.vim'
 
-Plugin 'git@github.com:bling/vim-airline'
-Plugin 'git@github.com:elzr/vim-json'
-Plugin 'git@github.com:skammer/vim-css-color'
-Plugin 'git@github.com:airblade/vim-gitgutter'
-Plugin 'git@github.com:editorconfig/editorconfig-vim'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'moll/vim-node'
-Plugin 'elixir-lang/vim-elixir'
+Plug 'git@github.com:bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'git@github.com:elzr/vim-json'
+Plug 'git@github.com:skammer/vim-css-color'
+Plug 'git@github.com:airblade/vim-gitgutter'
+Plug 'git@github.com:editorconfig/editorconfig-vim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'atelierbram/Base2Tone-vim'
+Plug 'xero/sourcerer'
+Plug 'dim13/smyck.vim'
+Plug 'moll/vim-node'
+Plug 'elixir-lang/vim-elixir'
+Plug 'cocopon/iceberg.vim'
 " used to format as I type...
 
-call vundle#end()
+call plug#end()
 
 " Brief help
 " :PluginList       - lists configured plugins
@@ -87,13 +91,18 @@ autocmd VimEnter *.js checktime
 autocmd BufWritePost *.js checktime
 
 " colors
-set background=dark
 set t_Co=256
+" set background=dark
+" colorscheme iceberg
+" colorscheme sourcerer
+" colorscheme Base2Tone_MorningLight
 colorscheme smyck
 "char length 100
-highlight OverLength ctermbg=red ctermfg=white guibg=darkred
-match OverLength /\%101v.\+/
+let g:airline_theme='light'
 
+" highlight OverLength ctermfg=white guibg=LightPink
+" match OverLength /\%101v.\+/
+map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 set mouse=a
 set enc=utf-8
 set fileencoding=utf-8
@@ -101,6 +110,8 @@ set fileencodings=ucs-bom,utf8,prc
 set hidden " Allow hidden buffers
 set backupdir=~/.vim-tmp/
 set directory=~/.vim-tmp/
+" Toggle highlight this line
+nnoremap <Leader>cc :set cursorline! <CR>
 
 " don't need to press escape key
 inoremap jk <Esc>
@@ -130,18 +141,29 @@ map <leader>nt :NERDTreeToggle<CR>
 " Pretty Print
 nmap <leader>pj :%!python -m json.tool<CR>
 
+" =================================================
+" For Prettier perhaps override with project specific .vimrc
+" ==================================================
+let g:prettier#config#single_quote = 'true'
+let g:prettier#config#prose_wrap = 'preserve'
+" let g:prettier#exec_cmd_path = '~/path/to/cli/prettier'
+"
 " ===========================
 " Syntastic Linting
 " ===========================
 map <leader>s :SyntasticCheck
+
 let g:syntastic_check_on_open=1
 let g:syntastic_javascript_checkers = ["eslint"]
 let g:syntastic_javascript_eslint_args = ['--fix']
-let g:syntastic_javascript_eslint_exec = "./node_modules/eslint/bin/eslint.js"
+let g:syntastic_javascript_eslint_exec = 'eslint'
+" let g:syntastic_javascript_eslint_exec = '$(npm bin)/eslint'
+" let g:syntastic_javascript_eslint_exe = '[ -f $(npm bin)/eslint ] && $(npm bin)/eslint || eslint -f compact --fix'
 " Vim javascript linting plugin
 let g:javascript_plugin_jsdoc = 1
 " php linting
 let g:syntastic_php_checkers = ["php"]
+au BufRead,BufNewFile *.{json,arcconfig} set filetype=json
 
 hi SpellBad ctermfg=white ctermbg=red guifg=white guibg=darkred
 hi SpellCap ctermfg=white ctermbg=darkred guifg=white guibg=darkred
@@ -170,7 +192,7 @@ let g:airline_right_sep='◀'
 let g:airline_inactive_collapse=0
 let g:airline_powerline_fonts=1
 if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 
 " unicode symbols
@@ -229,4 +251,6 @@ set guifont:Cousine\ for\ Powerline
 "   autocmd!
 "   autocmd FileType php call PhpSyntaxOverride()
 " augroup END
+set exrc
+set secure
 
