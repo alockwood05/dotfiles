@@ -19,8 +19,8 @@ Plug 'git@github.com:tpope/vim-fugitive'
 " Handy key bindings for tabbing through items
 Plug 'git@github.com:tpope/vim-unimpaired'
 
-" Autocomplete not working as of right now
-" Plug 'git@github.com:Valloric/YouCompleteMe'
+" Autocomplete
+Plug 'Valloric/YouCompleteMe', {dir: '~/.vim/bundle/YouCompleteMe', do:'./install.py --all'}
 
 " find files in this project
 Plug 'git@github.com:kien/ctrlp.vim'
@@ -38,7 +38,7 @@ Plug 'git@github.com:scrooloose/nerdtree'
 
 " Distraction free writing (unsure if I like it)
 Plug 'git@github.com:junegunn/goyo.vim'
-
+Plug 'leafgarland/typescript-vim'
 Plug 'git@github.com:bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'git@github.com:elzr/vim-json'
