@@ -13,57 +13,46 @@ call plug#begin('~/.vim/plugged')
 
 " Commentary use `gc` motion, or `gcc` for the line `:help commentary for more`
 Plug 'git@github.com:tpope/vim-commentary.git'
-"
 " Super handing git wrapper, also alows grepping :Ggrep
 Plug 'git@github.com:tpope/vim-fugitive'
 " Handy key bindings for tabbing through items
 Plug 'git@github.com:tpope/vim-unimpaired'
-
+"
 " Autocomplete
 Plug 'Valloric/YouCompleteMe', {dir: '~/.vim/bundle/YouCompleteMe', do:'./install.py --all'}
-
+"
 " find files in this project
 Plug 'git@github.com:kien/ctrlp.vim'
-
 " Syntax hilighting
 Plug 'git@github.com:scrooloose/syntastic'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'git@github.com:pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
+" Plug 'neoclide/vim-jsx-improve'
+Plug 'mxw/vim-jsx'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'nrocco/vim-phplint'
 Plug 'StanAngeloff/php.vim'
 " File exploration
 Plug 'git@github.com:scrooloose/nerdtree'
-" Plug 'git@github.com:mileszs/ack.vim'
-
 " Distraction free writing (unsure if I like it)
-Plug 'git@github.com:junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'git@github.com:bling/vim-airline'
+Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'git@github.com:elzr/vim-json'
 Plug 'git@github.com:skammer/vim-css-color'
 Plug 'git@github.com:airblade/vim-gitgutter'
 Plug 'git@github.com:editorconfig/editorconfig-vim'
 Plug 'kchmck/vim-coffee-script'
+" Colors
 Plug 'atelierbram/Base2Tone-vim'
 Plug 'xero/sourcerer'
 Plug 'dim13/smyck.vim'
 Plug 'moll/vim-node'
 Plug 'elixir-lang/vim-elixir'
 Plug 'cocopon/iceberg.vim'
-" used to format as I type...
-
 call plug#end()
 
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
 " ===========================
 " Basics
@@ -77,8 +66,10 @@ map <F11> :set invpaste<CR>
 set pastetoggle=<F11>
 set backspace=indent,eol,start
 syntax on
-
+let g:jsx_ext_required = 0
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+set expandtab
+
 
 " remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
@@ -97,6 +88,11 @@ set t_Co=256
 " colorscheme sourcerer
 " colorscheme Base2Tone_MorningLight
 colorscheme smyck
+
+command Light colorscheme Base2Tone_MorningLight
+command Dark colorscheme smyck
+command Darker colorscheme sourcerer
+command Cool colorscheme iceberg
 "char length 100
 let g:airline_theme='light'
 
@@ -139,7 +135,7 @@ noremap <Leader>c :ccl <bar> lcl<CR>
 map <leader>rr :source ~/.vimrc<CR>
 map <leader>nt :NERDTreeToggle<CR>
 " Pretty Print
-nmap <leader>pj :%!python -m json.tool<CR>
+nmap <leader>pj :%!jq .<CR>
 
 " =================================================
 " For Prettier perhaps override with project specific .vimrc
@@ -155,15 +151,15 @@ map <leader>s :SyntasticCheck
 
 let g:syntastic_check_on_open=1
 let g:syntastic_javascript_checkers = ["eslint"]
-let g:syntastic_javascript_eslint_args = ['--fix']
+let g:syntastic_javascript_eslint_args = ['--quiet', '--fix']
 let g:syntastic_javascript_eslint_exec = 'eslint'
 " let g:syntastic_javascript_eslint_exec = '$(npm bin)/eslint'
-" let g:syntastic_javascript_eslint_exe = '[ -f $(npm bin)/eslint ] && $(npm bin)/eslint || eslint -f compact --fix'
+let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 " Vim javascript linting plugin
 let g:javascript_plugin_jsdoc = 1
 " php linting
 let g:syntastic_php_checkers = ["php"]
-au BufRead,BufNewFile *.{json,arcconfig} set filetype=json
+au BufRead,BufNewFile *.{json,arcconfig,arclint} set filetype=json
 
 hi SpellBad ctermfg=white ctermbg=red guifg=white guibg=darkred
 hi SpellCap ctermfg=white ctermbg=darkred guifg=white guibg=darkred
