@@ -12,19 +12,19 @@ let g:multi_cursor_use_default_mapping=0
 call plug#begin('~/.vim/plugged')
 
 " Commentary use `gc` motion, or `gcc` for the line `:help commentary for more`
-Plug 'git@github.com:tpope/vim-commentary.git'
+Plug 'tpope/vim-commentary'
 " Super handing git wrapper, also alows grepping :Ggrep
-Plug 'git@github.com:tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " Handy key bindings for tabbing through items
-Plug 'git@github.com:tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 "
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', {dir: '~/.vim/bundle/YouCompleteMe', do:'./install.py --all'}
+Plug 'Valloric/YouCompleteMe', {'dir': '~/.vim/bundle/YouCompleteMe', 'do' :'./install.py --all'}
 "
 " find files in this project
-Plug 'git@github.com:kien/ctrlp.vim'
+Plug 'kien/ctrlp'
 " Syntax hilighting
-Plug 'git@github.com:scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'pangloss/vim-javascript'
 " Plug 'neoclide/vim-jsx-improve'
@@ -33,16 +33,16 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'nrocco/vim-phplint'
 Plug 'StanAngeloff/php.vim'
 " File exploration
-Plug 'git@github.com:scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 " Distraction free writing (unsure if I like it)
 Plug 'junegunn/goyo.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'git@github.com:elzr/vim-json'
-Plug 'git@github.com:skammer/vim-css-color'
-Plug 'git@github.com:airblade/vim-gitgutter'
-Plug 'git@github.com:editorconfig/editorconfig-vim'
+Plug 'elzr/vim-json'
+Plug 'skammer/vim-css-color'
+Plug 'airblade/vim-gitgutter'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'kchmck/vim-coffee-script'
 " Colors
 Plug 'atelierbram/Base2Tone-vim'
@@ -89,10 +89,18 @@ set t_Co=256
 " colorscheme Base2Tone_MorningLight
 colorscheme smyck
 
-command Light colorscheme Base2Tone_MorningLight
-command Dark colorscheme smyck
-command Darker colorscheme sourcerer
-command Cool colorscheme iceberg
+if exists(':Light')
+  command Light colorscheme Base2Tone_MorningLight
+endif
+if exists(':Dark')
+  command Dark colorscheme smyck
+endif
+if exists(':Darker')
+  command Darker colorscheme sourcerer
+endif
+if exists(':Cool')
+  command Cool colorscheme iceberg
+endif
 "char length 100
 let g:airline_theme='light'
 
