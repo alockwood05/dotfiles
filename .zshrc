@@ -7,82 +7,56 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="avit"
 
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Uncomment this to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment following line if you want to  shown in the command execution time stamp
-# in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
-# yyyy-mm-dd
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
-
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-[ -s $HOME/.nvm/nvm.sh ] && . $HOME/.nvm/nvm.sh # This loads NVM
 export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export ARCBIN_DIR="$HOME/Code/Phacility/arcanist/bin/";
+# To use coreutils `brew install coreutils`
 export COREUTILS_GNUBIN_DIR="/usr/local/opt/coreutils/libexec/gnubin/";
-export PATH="$ARCBIN_DIR:$COREUTILS_GNUBIN_DIR:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$PATH"
+export PATH="$COREUTILS_GNUBIN_DIR:$PATH"
 export EDITOR=vim
-alias arcprune='git branch | grep arcpatch | xargs git branch -D {}'
-export VIMRUNTIME="/$(brew --prefix)/Cellar/macvim/7.4-103/MacVim.app/Contents/Resources/vim/runtime"
-$PATH:/somewhere/arcanist/bin/
-
 export MANPATH="/usr/local/man:$MANPATH"
 
-# # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+#Ruby
+source /usr/local/share/chruby/chruby.sh
 
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+## Customizations
+# Better `ls`
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+alias ls='ls -p'
+# Better `grep`
+export GREP_OPTIONS='--color=auto'
 
-# The next line updates PATH for the Google Cloud SDK.
-source '/Users/xander/google-cloud-sdk/path.zsh.inc'
+# brew install grc
+# Colorized `traceroute`, `tail`, `head` (requires prepending command with `grc`)
+[[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
 
-# The next line enables shell command completion for gcloud.
-source '/Users/xander/google-cloud-sdk/completion.zsh.inc'
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" scp sftp ssh
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en1"
+alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
+
+# Don’t clear the screen after quitting a manual page
+export MANPAGER="less -X"
+
+# Make some commands not show up in history
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+
+#
+# One Medical specific
+#
+
+# Automatically jump to your onelife directory from anywhere
+alias onelife='cd ~/Code/onemedical/onelife'
+alias onelife-ssh='docker exec -it onelife_onelife_1 /bin/bash';
+alias onelife-seed='bundle exec rake onelife:seeder:seed_from_db_dump';
+alias onelife-migrate='bin/rails db:migrate RAILS_ENV=development';
+alias onelife-inventory-index='rake onelife:search_index:reindex["AppointmentInventories"]'

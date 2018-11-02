@@ -17,39 +17,38 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 " Handy key bindings for tabbing through items
 Plug 'tpope/vim-unimpaired'
-"
-" Autocomplete
-Plug 'Valloric/YouCompleteMe', {'dir': '~/.vim/bundle/YouCompleteMe', 'do' :'./install.py --all'}
-"
-" find files in this project
-Plug 'kien/ctrlp'
-" Syntax hilighting
+" Syntax
 Plug 'scrooloose/syntastic'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'pangloss/vim-javascript'
-" Plug 'neoclide/vim-jsx-improve'
+Plug 'ngmy/vim-rubocop'
+Plug 'vim-ruby/vim-ruby'
 Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'nrocco/vim-phplint'
 Plug 'StanAngeloff/php.vim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'moll/vim-node'
+Plug 'elixir-lang/vim-elixir'
+" prettier js
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 " File exploration
 Plug 'scrooloose/nerdtree'
 " Distraction free writing (unsure if I like it)
 Plug 'junegunn/goyo.vim'
-Plug 'leafgarland/typescript-vim'
+" Editor Setup and Interface
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Valloric/YouCompleteMe', {'dir': '~/.vim/bundle/YouCompleteMe', 'do' :'./install.py --all'}
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'elzr/vim-json'
 Plug 'skammer/vim-css-color'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'kchmck/vim-coffee-script'
 " Colors
 Plug 'atelierbram/Base2Tone-vim'
 Plug 'xero/sourcerer'
 Plug 'dim13/smyck.vim'
-Plug 'moll/vim-node'
-Plug 'elixir-lang/vim-elixir'
 Plug 'cocopon/iceberg.vim'
 call plug#end()
 
@@ -60,6 +59,8 @@ call plug#end()
 filetype plugin indent on    " required
 set number
 set hlsearch
+
+set shell=$SHELL
 
 map <xCSI>[62~ <MouseDown>
 map <F11> :set invpaste<CR>
@@ -158,15 +159,18 @@ let g:prettier#config#prose_wrap = 'preserve'
 map <leader>s :SyntasticCheck
 
 let g:syntastic_check_on_open=1
+" js
 let g:syntastic_javascript_checkers = ["eslint"]
 let g:syntastic_javascript_eslint_args = ['--quiet', '--fix']
 let g:syntastic_javascript_eslint_exec = 'eslint'
 " let g:syntastic_javascript_eslint_exec = '$(npm bin)/eslint'
 let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
-" Vim javascript linting plugin
 let g:javascript_plugin_jsdoc = 1
-" php linting
+" php
 let g:syntastic_php_checkers = ["php"]
+" ruby
+let g:syntastic_ruby_checkers = ["rubocop", "mri"]
+
 au BufRead,BufNewFile *.{json,arcconfig,arclint} set filetype=json
 
 hi SpellBad ctermfg=white ctermbg=red guifg=white guibg=darkred
