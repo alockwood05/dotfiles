@@ -7,7 +7,7 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="avit"
 
-plugins=(git)
+plugins=(git, gitfast)
 source $ZSH/oh-my-zsh.sh
 
 export NVM_DIR="$HOME/.nvm"
@@ -50,6 +50,25 @@ export MANPAGER="less -X"
 # Make some commands not show up in history
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
+# us
+alias gcor='git checkoutr';
+# `~/.oh-my-zsh/plugins/gitfast/git-completion.bash`
+
+# ```
+# 		# __gitcomp_nl "$(__git_refs '' $track)"
+#                 # https://gist.github.com/mmrko/b3ec6da9bea172cdb6bd83bdf95ee817
+#                 if [ "$command" = "checkoutr" ]; then
+#                   __gitcomp_nl "$(__git_refs '' $track)"
+#                 else
+#                   __gitcomp_nl "$(__git_heads '' $track)"
+#                 fi
+# 		;;
+# ```
+
+
+
+
+
 #
 # One Medical specific
 #
@@ -60,3 +79,6 @@ alias onelife-ssh='docker exec -it onelife_onelife_1 /bin/bash';
 alias onelife-seed='bundle exec rake onelife:seeder:seed_from_db_dump';
 alias onelife-migrate='bin/rails db:migrate RAILS_ENV=development';
 alias onelife-inventory-index='rake onelife:search_index:reindex["AppointmentInventories"]'
+
+
+

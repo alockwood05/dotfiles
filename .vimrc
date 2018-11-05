@@ -20,6 +20,7 @@ Plug 'tpope/vim-unimpaired'
 " Syntax
 Plug 'scrooloose/syntastic'
 Plug 'pangloss/vim-javascript'
+Plug 'burnettk/vim-angular'
 Plug 'ngmy/vim-rubocop'
 Plug 'vim-ruby/vim-ruby'
 Plug 'mxw/vim-jsx'
