@@ -21,7 +21,9 @@ export EDITOR=vim
 export MANPATH="/usr/local/man:$MANPATH"
 
 #Ruby
+# => Brew install chruby
 source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
 
 
 ## Customizations
@@ -39,6 +41,10 @@ export GREP_OPTIONS='--color=auto'
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" scp sftp ssh
 
+
+alias dc='docker-compose'
+alias hist='history | grep '
+alias vimcc='rm ~/.vim-tmp/* ~/.vim-tmp/.*'
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en1"
@@ -50,7 +56,9 @@ export MANPAGER="less -X"
 # Make some commands not show up in history
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
-# us
+#
+# gitfast updated for local only bash completion
+# git bash completion
 alias gcor='git checkoutr';
 # `~/.oh-my-zsh/plugins/gitfast/git-completion.bash`
 
@@ -75,10 +83,13 @@ alias gcor='git checkoutr';
 
 # Automatically jump to your onelife directory from anywhere
 alias onelife='cd ~/Code/onemedical/onelife'
-alias onelife-ssh='docker exec -it onelife_onelife_1 /bin/bash';
-alias onelife-seed='bundle exec rake onelife:seeder:seed_from_db_dump';
-alias onelife-migrate='bin/rails db:migrate RAILS_ENV=development';
+alias onelife-ssh='docker exec -it onelife_onelife_1 /bin/bash'
+alias onelife-seed='bundle exec rake onelife:seeder:seed_from_db_dump'
+alias onelife-migrate='bin/rails db:migrate RAILS_ENV=development'
 alias onelife-inventory-index='rake onelife:search_index:reindex["AppointmentInventories"]'
+alias be='bundle exec'
+alias onelife-assets='bundle exec rake assets:precompile assets:clean RAILS_ENV=development'
+alias onelife-ssh-seoul='bundle exec beans ssh exec -a onelife-seoul -i ~/.ssh/1life-core.pem'
 
-
-
+# for use with `binding.pry` debugger
+alias onelife-attach='docker attach onelife_onelife_1'

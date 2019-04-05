@@ -15,12 +15,17 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-commentary'
 " Super handing git wrapper, also alows grepping :Ggrep
 Plug 'tpope/vim-fugitive'
+" `ds`, `cs`, and `yss`
+Plug 'tpope/vim-surround'
 " Handy key bindings for tabbing through items
 Plug 'tpope/vim-unimpaired'
+" Tests
+Plug 'janko-m/vim-test'
 " Syntax
 Plug 'scrooloose/syntastic'
 Plug 'pangloss/vim-javascript'
 Plug 'burnettk/vim-angular'
+Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'ngmy/vim-rubocop'
 Plug 'vim-ruby/vim-ruby'
 Plug 'mxw/vim-jsx'
@@ -72,6 +77,8 @@ let g:jsx_ext_required = 0
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set expandtab
 
+" copy filename
+map <Leader>fn :let @+ = expand("%") \| echo 'copied> ' . @+<CR>
 
 " remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
@@ -91,16 +98,16 @@ set t_Co=256
 " colorscheme Base2Tone_MorningLight
 colorscheme smyck
 
-if exists(':Light')
+if !exists(':Light')
   command Light colorscheme Base2Tone_MorningLight
 endif
-if exists(':Dark')
+if !exists(':Dark')
   command Dark colorscheme smyck
 endif
-if exists(':Darker')
+if !exists(':Darker')
   command Darker colorscheme sourcerer
 endif
-if exists(':Cool')
+if !exists(':Cool')
   command Cool colorscheme iceberg
 endif
 "char length 100
@@ -114,8 +121,9 @@ set enc=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf8,prc
 set hidden " Allow hidden buffers
-set backupdir=~/.vim-tmp/
-set directory=~/.vim-tmp/
+set backupdir=~/.vim-tmp//
+set directory=~/.vim-tmp//
+set undodir=~/.vim-tmp//
 " Toggle highlight this line
 nnoremap <Leader>cc :set cursorline! <CR>
 
@@ -146,7 +154,6 @@ map <leader>rr :source ~/.vimrc<CR>
 map <leader>nt :NERDTreeToggle<CR>
 " Pretty Print
 nmap <leader>pj :%!jq .<CR>
-
 " =================================================
 " For Prettier perhaps override with project specific .vimrc
 " ==================================================
@@ -171,6 +178,8 @@ let g:javascript_plugin_jsdoc = 1
 let g:syntastic_php_checkers = ["php"]
 " ruby
 let g:syntastic_ruby_checkers = ["rubocop", "mri"]
+" match do/end ...
+runtime macros/matchit.vim
 
 au BufRead,BufNewFile *.{json,arcconfig,arclint} set filetype=json
 
@@ -240,7 +249,7 @@ map <leader>bq :bp<bar>sp<bar>bn<bar>bd<CR>
 " CtrlP ctrlp ctrl-p
 " ===========================
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](bower_components|node_modules|false|dist|\.build|\.tmp)$'
+  \ 'dir':  '\v[\/](vendor|tmp|bower_components|node_modules|false|dist|\.build|\.tmp)$'
   \ }
 let g:ctrlp_max_files = 0
 let g:ctrlp_show_hidden = 0
