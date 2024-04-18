@@ -76,3 +76,8 @@ alias gcor='git checkoutr';
 #                 fi
 # 		;;
 # ```
+
+# =======================
+# Directory Aliases
+# =======================
+alias obsidian='cd /Users/alexanderlockwood/Library/Mobile\ Documents/iCloud~md~obsidian/Documents'

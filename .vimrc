@@ -77,7 +77,7 @@ let g:jsx_ext_required = 0
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set expandtab
 
-" copy filename
+" copy filename: \fn
 map <Leader>fn :let @+ = expand("%") \| echo 'copied> ' . @+<CR>
 
 " remove any trailing whitespace that is in the file
@@ -124,8 +124,8 @@ set hidden " Allow hidden buffers
 set backupdir=~/.vim-tmp//
 set directory=~/.vim-tmp//
 set undodir=~/.vim-tmp//
-" Toggle highlight this line
-nnoremap <Leader>cc :set cursorline! <CR>
+" Toggle highlight this line, <Leader> defaults to `\`
+nnoremap <Leader>cc :set cursorline! <CR> " \cc
 
 " don't need to press escape key
 inoremap jk <Esc>
@@ -271,4 +271,3 @@ set guifont:Cousine\ for\ Powerline
 " augroup END
 set exrc
 set secure
-
