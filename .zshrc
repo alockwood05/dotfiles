@@ -6,7 +6,7 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="avit"
-plugins=(virtualenv, git, gitfast)
+plugins=(virtualenv git gitfast)
 source $ZSH/oh-my-zsh.sh
 export VIRTUAL_ENV_DISABLE_PROMPT=yes
 export NVM_DIR="$HOME/.nvm"
@@ -24,10 +24,10 @@ export MANPATH="/usr/local/man:$MANPATH"
 # source /usr/local/share/chruby/chruby.sh
 # source /usr/local/share/chruby/auto.sh
 # => Brew install rbenv
-eval "$(rbenv init -)"
-if which ruby >/dev/null && which gem >/dev/null; then
-  PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-fi
+# eval "$(rbenv init -)"
+# if which ruby >/dev/null && which gem >/dev/null; then
+#   PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+# fi
 
 ## Customizations
 # Better `ls`
