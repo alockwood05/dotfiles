@@ -15,14 +15,12 @@ set clipboard=unnamed
 " ===========================
 " Basics
 " ==========================
-set hlsearch
-set shell=$SHELL
-set backspace=indent,eol,start
-
 " don't need to press escape key
 inoremap jk <Esc>
-cnoremap jk <Esc>
 
+" Vertical split
+" exmap vs
+"
 " ===========================
 " misc
 " ===========================
@@ -59,31 +57,24 @@ exmap q obcommand workspace:close
 " ===========================
 " splits
 " ===========================
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-H> <C-W><C-H>
-nnoremap ]w <C-W><C-L>
-nnoremap [w <C-W><C-H>
 
 exmap focusRight obcommand editor:focus-right
-" nmap <C-w>l :focusRight
-nmap <C-L> :focusRight
+nmap <C-w>l :focusRight
 
 exmap focusLeft obcommand editor:focus-left
 nmap <C-w>h :focusLeft
 
 exmap focusTop obcommand editor:focus-top
-" nmap <C-w>k :focusTop
-nmap <C-K> :focusTop
+nmap <C-w>k :focusTop
 
 exmap focusBottom obcommand editor:focus-bottom
-" nmap <C-w>j :focusBottom
-nmap <C-J> :focusBottom
+nmap <C-w>j :focusBottom
 
-exmap vsplit obcommand workspace:split-vertical
-nmap <C-w>v :vsplit
+exmap vs obcommand workspace:split-vertical
+nmap <C-w>v :vs
 
-exmap split obcommand workspace:split-horizontal
-nmap <C-w>s :split
+exmap sp obcommand workspace:split-horizontal
+nmap <C-w>s :sp
 
 " Yank to system clipboard
 set clipboard=unnamed
