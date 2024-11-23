@@ -14,13 +14,13 @@ def test_sync_push(mock_subprocess_run):
     result = runner.invoke(app, ["sync", "documents", "push"])
     assert result.exit_code == 0
     assert "Pushing files from /path/to/source/documents to /path/to/external/documents..." in result.output
-    mock_subprocess_run.assert_called_once_with(["rsync", "-avh", "--progress", "--delete", "/path/to/source/documents/", "/path/to/external/documents/"])
+    mock_subprocess_run.assert_called_once_with(["rsync", "-avh", "--progress", "/path/to/source/documents/", "/path/to/external/documents/"])
 
 def test_sync_pull(mock_subprocess_run):
     result = runner.invoke(app, ["sync", "photos", "pull"])
     assert result.exit_code == 0
     assert "Pulling files from /path/to/external/photos to /path/to/source/photos..." in result.output
-    mock_subprocess_run.assert_called_once_with(["rsync", "-avh", "--progress", "--delete", "/path/to/external/photos/", "/path/to/source/photos/"])
+    mock_subprocess_run.assert_called_once_with(["rsync", "-avh", "--progress", "/path/to/external/photos/", "/path/to/source/photos/"])
 
 def test_sync_invalid_folder():
     result = runner.invoke(app, ["sync", "invalid_folder", "push"])
@@ -51,16 +51,16 @@ def test_sync_all_pull(mock_subprocess_run):
     assert mock_subprocess_run.call_count == 3
 
 def test_menu_sync_all_push(mock_subprocess_run):
-  result = runner.invoke(app, ["menu"], input="4\npush\n")
-  assert result.exit_code == 0
-  assert "Syncing documents (push)..." in result.output
-  assert "Syncing photos (push)..." in result.output
-  assert "Syncing videos (push)..." in result.output
-  assert "All folders synced." in result.output
-  assert mock_subprocess_run.call_count == 3
+    result = runner.invoke(app, ["menu"], input="4\npush\n")
+    assert result.exit_code == 0
+    assert "Syncing documents (push)..." in result.output
+    assert "Syncing photos (push)..." in result.output
+    assert "Syncing videos (push)..." in result.output
+    assert "All folders synced." in result.output
+    assert mock_subprocess_run.call_count == 3
 
 def test_menu_sync_specific_folder(mock_subprocess_run):
-  result = runner.invoke(app, ["menu"], input="1\npush\n")
-  assert result.exit_code == 0
-  assert "Pushing files from /path/to/source/documents to /path/to/external/documents..." in result.output
-  mock_subprocess_run.assert_called_once_with(["rsync", "-avh", "--progress", "--delete", "/path/to/source/documents/", "/path/to/external/documents/"])
+    result = runner.invoke(app, ["menu"], input="1\npush\n")
+    assert result.exit_code == 0
+    assert "Pushing files from /path/to/source/documents to /path/to/external/documents..." in result.output
+    mock_subprocess_run.assert_called_once_with(["rsync", "-avh", "--progress", "/path/to/source/documents/", "/path/to/external/documents/"])
