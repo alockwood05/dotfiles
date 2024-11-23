@@ -1,3 +1,4 @@
 /plugged/
 .DS_Store
 bundle/YouCompleteMe/
+/scripts/__pycache__
