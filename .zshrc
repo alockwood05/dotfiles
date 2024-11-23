@@ -19,6 +19,17 @@ export PATH="$COREUTILS_GNUBIN_DIR:$PATH"
 export EDITOR=vim
 export MANPATH="/usr/local/man:$MANPATH"
 
+
+# Python / pyenv
+# export PATH="$(pyenv root)/shims:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+export LD_LIBRARY_PATH="/usr/lib:/usr/local/lib:/opt/homebrew/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
+export DYLD_LIBRARY_PATH="/usr/local/lib:/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
+
 #Ruby
 # => Brew install chruby
 # source /usr/local/share/chruby/chruby.sh
@@ -81,3 +92,18 @@ alias gcor='git checkoutr';
 # Directory Aliases
 # =======================
 alias obsidian='cd /Users/alexanderlockwood/Library/Mobile\ Documents/iCloud~md~obsidian/Documents'
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
