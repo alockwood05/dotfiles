@@ -13,6 +13,7 @@ export VIRTUAL_ENV_DISABLE_PROMPT=yes
 # To use coreutils `brew install coreutils`
 export COREUTILS_GNUBIN_DIR="/usr/local/opt/coreutils/libexec/gnubin/";
 export HOMEBREW_PATH="/opt/homebrew/bin"
+export PATH="$HOMEBREW_PATH:$COREUTILS_GNUBIN_DIR:$PATH"
 export EDITOR=vim
 export MANPATH="/usr/local/man:$MANPATH"
 
