@@ -9,44 +9,27 @@ ZSH_THEME="avit"
 plugins=(virtualenv git gitfast)
 source $ZSH/oh-my-zsh.sh
 export VIRTUAL_ENV_DISABLE_PROMPT=yes
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # To use coreutils `brew install coreutils`
 export COREUTILS_GNUBIN_DIR="/usr/local/opt/coreutils/libexec/gnubin/";
-export PATH="$COREUTILS_GNUBIN_DIR:$PATH"
+export HOMEBREW_PATH="/opt/homebrew/bin"
 export EDITOR=vim
 export MANPATH="/usr/local/man:$MANPATH"
 
 
-# Python / pyenv
-# export PATH="$(pyenv root)/shims:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# Python trying mise https://github.com/jdx/mise for version
 
 export LD_LIBRARY_PATH="/usr/lib:/usr/local/lib:/opt/homebrew/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
 export DYLD_LIBRARY_PATH="/usr/local/lib:/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
 
-# __conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-#         . "/opt/miniconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="$(pyenv root)/shims:/opt/miniconda3/bin:$PATH:"
-#     fi
-# fi
-# unset __conda_setup
+# NODE - USE FNM "Fast Nodeversion Manager"
+# `brew install fnm
+# `fnm install --lts`
 
-# <<< conda initialize <<<
-
-#Ruby
+#
+# Ruby
+#
 # => Brew install chruby
 # source /usr/local/share/chruby/chruby.sh
 # source /usr/local/share/chruby/auto.sh
@@ -56,7 +39,12 @@ export DYLD_LIBRARY_PATH="/usr/local/lib:/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
 #   PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 # fi
 
+#version managers, mise for python (could use for all), FNM for node
+eval "$(~/.local/bin/mise activate zsh
+export PATH=/home/$USER/.fnm:$PATH
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 ## Customizations
+
 # Better `ls`
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
