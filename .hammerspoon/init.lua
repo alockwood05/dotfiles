@@ -1,6 +1,11 @@
 -- enable command line usage
 -- require("hs.ipc")
 
+-- hello world
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", function()
+  hs.notify.new({title="Hammerspoon", informativeText="Hello World"}):send()
+end)
+
 -- Function to get today's date in the desired format
 local function getFormattedDate()
   return os.date("%Y-%m-%d")  -- Customize the format as needed
