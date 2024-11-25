@@ -26,12 +26,13 @@ local replacementWatcher = hs.eventtap.new({hs.eventtap.event.types.keyDown}, fu
 
   -- `//today`
   if string.sub(typedText, -7) == "//today" then
-      -- Replace `//today` with the current date
-      hs.eventtap.keyStroke({"cmd"}, "delete") -- Clear last 7 characters
-      hs.eventtap.keyStrokes(getFormattedDate()) -- Insert the date
-      typedText = "" -- Reset the buffer
+      -- Replace `//today` with the current date, after a delay (for vscode or other app hooks)
+      hs.timer.doAfter(0.1, function()
+        hs.eventtap.keyStroke({"cmd"}, "delete") -- Clear last 7 characters
+        hs.eventtap.keyStrokes(getFormattedDate()) -- Insert the date
+        typedText = "" -- Reset the buffer
+      end)
   end
-
   return false -- Pass the event to the system
 end)
 
