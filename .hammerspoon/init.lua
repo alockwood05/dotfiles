@@ -14,10 +14,22 @@ end
 -- Track typed text in a buffer
 local typedText = ""
 
--- Watch for `//today` being typed
+-- logic to check for a string and replace text
+local function replaceTextInput(listenText, replacementFn)
+  local precedingTextIsBacktick = string.sub(typedText, -(#listenText), -(#listenText+1)) == "`"
+  local listenTextMatches = string.sub(typedText, -#listenText) == listenText
+  if (listenTextMatches and not precedingTextIsBacktick ) then
+    hs.timer.doAfter(0.1, function()
+      hs.eventtap.keyStroke({"cmd"}, "delete")
+      hs.eventtap.keyStrokes(replacementFn())
+      typedText = "" -- Reset the buffer
+    end)
+  end
+end
+
+-- Watch text being typed
 local replacementWatcher = hs.eventtap.new({hs.eventtap.event.types.keyDown}, function(event)
   local currentKey = hs.keycodes.map[event:getKeyCode()]
-
   -- Update the buffer based on the key pressed
   if #currentKey == 1 then
       typedText = typedText .. currentKey
@@ -28,16 +40,7 @@ local replacementWatcher = hs.eventtap.new({hs.eventtap.event.types.keyDown}, fu
   end
 
   -- Replacements
-
-  -- `//today`
-  if string.sub(typedText, -7) == "//today" then
-      -- Replace `//today` with the current date, after a delay (for vscode or other app hooks)
-      hs.timer.doAfter(0.1, function()
-        hs.eventtap.keyStroke({"cmd"}, "delete") -- Clear last 7 characters
-        hs.eventtap.keyStrokes(getFormattedDate()) -- Insert the date
-        typedText = "" -- Reset the buffer
-      end)
-  end
+  replaceTextInput("//today", getFormattedDate)
   return false -- Pass the event to the system
 end)
 
