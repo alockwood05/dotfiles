@@ -30,7 +30,6 @@ Predefined folders:
 Notes:
 - Ensure `rsync` is installed on your system.
 - Modify the `SYNCLIST` dictionary to include your specific folder paths.
-- The script will prompt you to select an external drive from the available drives connected to your system.
 """
 
 import typer
@@ -76,7 +75,9 @@ def select_external_drive():
     ]
 
     answers = prompt(questions)
-    return answers["drive"]
+    selected_drive = answers["drive"]
+    typer.echo(f"Selected external drive: {selected_drive}")
+    return selected_drive
 
 def sync_directory(source: str, destination: str, action: str, dry_run: bool, external_drive: str):
     rsync_command = ["rsync", "-avh", "--stats"]
@@ -96,7 +97,6 @@ def sync_directory(source: str, destination: str, action: str, dry_run: bool, ex
         typer.echo(typer.style("Invalid action! Use 'push' or 'pull'.", fg=typer.colors.RED))
         raise typer.Exit(code=1)
 
-    #log a message to the terminal for debugging
     subprocess.run(rsync_command)
     typer.echo(typer.style("Sync completed.", fg=typer.colors.BRIGHT_BLUE))
 
@@ -109,7 +109,6 @@ def sync(sync_item: str, action: str, dry_run: bool = False):
     - action: Whether to 'push' or 'pull'.
     - dry_run: If True, perform a dry run without making any changes.
     """
-
     external_drive = select_external_drive()
 
     if sync_item not in SYNCLIST:
@@ -127,11 +126,12 @@ def sync_all(action: str, dry_run: bool = False):
     - action: Whether to 'push' or 'pull'.
     - dry_run: If True, perform a dry run without making any changes.
     """
+    external_drive = select_external_drive()
+
     if action not in ["push", "pull"]:
         typer.echo(typer.style("Invalid action! Use 'push' or 'pull'.", fg=typer.colors.RED))
         raise typer.Exit(code=1)
 
-    external_drive = select_external_drive()
     for sync_item, paths in SYNCLIST.items():
         typer.echo(typer.style(f"Syncing {sync_item} ({action})...", fg=typer.colors.YELLOW))
         for source, destination in paths:
