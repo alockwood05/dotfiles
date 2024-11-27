@@ -11,7 +11,7 @@ Replace `~/GitHub` with your path
 ln -s ~/GitHub/dotfiles/.vimrc ~/.vimrc &
 ln -s ~/GitHub/dotfiles/.zshrc ~/.zshrc &
 ln -s ~/GitHub/dotfiles/.vim/ ~/.vim
-ln -s ~/GitHub/dotfiles/.hammerspoon/ ~/.hammerspoon
+ln -s ~/GitHub/dotfiles/.hammerspoon ~/.hammerspoon
 ln -s ~/GitHub/dotfiles/.obsidian.vimrc ~/Library/Mobil\ Documents/iCloud~md~obsidian/Documents/unimaginable.life
 
 ```
