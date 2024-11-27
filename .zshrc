@@ -18,7 +18,6 @@ export EDITOR=vim
 export MANPATH="/usr/local/man:$MANPATH"
 
 
-# Python trying mise https://github.com/jdx/mise for version
 
 export LD_LIBRARY_PATH="/usr/lib:/usr/local/lib:/opt/homebrew/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
@@ -28,20 +27,10 @@ export DYLD_LIBRARY_PATH="/usr/local/lib:/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
 # `brew install fnm
 # `fnm install --lts`
 
-#
-# Ruby
-#
-# => Brew install chruby
-# source /usr/local/share/chruby/chruby.sh
-# source /usr/local/share/chruby/auto.sh
-# => Brew install rbenv
-# eval "$(rbenv init -)"
-# if which ruby >/dev/null && which gem >/dev/null; then
-#   PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-# fi
 
-#version managers, mise for python (could use for all), FNM for node
-eval "$(~/.local/bin/mise activate zsh
+# Python, other Languages `mise` for local version management
+
+eval "$(mise activate)"
 export PATH=/home/$USER/.fnm:$PATH
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 ## Customizations
@@ -76,24 +65,7 @@ export MANPAGER="less -X"
 # Make some commands not show up in history
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
-#
-# gitfast updated for local only bash completion
-# git bash completion
-alias gcor='git checkoutr';
-# `~/.oh-my-zsh/plugins/gitfast/git-completion.bash`
-
-# ```
-# 		# __gitcomp_nl "$(__git_refs '' $track)"
-#                 # https://gist.github.com/mmrko/b3ec6da9bea172cdb6bd83bdf95ee817
-#                 if [ "$command" = "checkoutr" ]; then
-#                   __gitcomp_nl "$(__git_refs '' $track)"
-#                 else
-#                   __gitcomp_nl "$(__git_heads '' $track)"
-#                 fi
-# 		;;
-# ```
-
-# =======================
-# Directory Aliases
-# =======================
 alias obsidian='cd /Users/alexanderlockwood/Library/Mobile\ Documents/iCloud~md~obsidian/Documents'
+
+
+echo ".zshrc is loaded"

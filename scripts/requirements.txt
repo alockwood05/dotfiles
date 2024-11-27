@@ -1,3 +1,4 @@
 pytest
 typer
 pytest-mock
+InquirerPy
