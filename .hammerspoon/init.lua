@@ -20,7 +20,7 @@ local function replaceTextInput(listenText, replacementFn)
   local listenTextMatches = string.sub(typedText, -#listenText) == listenText
   if (listenTextMatches and not precedingTextIsBacktick ) then
     hs.timer.doAfter(0.1, function()
-      hs.eventtap.keyStroke({"cmd"}, "delete")
+      hs.eventtap.keyStroke({"alt"}, "delete")
       hs.eventtap.keyStrokes(replacementFn())
       typedText = "" -- Reset the buffer
     end)
