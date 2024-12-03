@@ -37,7 +37,7 @@ function obj:_replaceTextInput(typedText, listenText, replacementFn)
     local escaped = string.sub(typedText, -(#listenText + 1), -(#listenText + 1)) == self.escapeChar
     if found and not escaped then
         hs.timer.doAfter(0.1, function()
-            hs.eventtap.keyStroke({"cmd"}, "delete") -- Clear the last characters matching `listenText`
+            hs.eventtap.keyStroke({"alt"}, "delete") -- Clear the last characters matching `listenText`
             hs.eventtap.keyStrokes(replacementFn()) -- Insert the replacement
         end)
         return "" -- Reset buffer after replacement
