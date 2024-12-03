@@ -9,6 +9,7 @@
   "python.testing.pytestEnabled": true,
   "python.testing.unittestEnabled": true,
   "Lua.diagnostics.globals": [
-    "hs"
+    "hs",
+    "spoon"
   ]
 }
