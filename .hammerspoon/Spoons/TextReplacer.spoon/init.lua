@@ -36,7 +36,8 @@ function obj:_replaceTextInput(typedText, listenText, replacementFn)
     local found = string.sub(typedText, -#listenText) == listenText
     local escaped = string.sub(typedText, -(#listenText + 1), -(#listenText + 1)) == self.escapeChar
     if found and not escaped then
-        hs.timer.doAfter(0.1, function()
+        hs.timer.doAfter(0, function()
+            hs.eventtap.keyStroke({"alt"}, "delete") -- Clear the last characters matching `listenText`
             hs.eventtap.keyStroke({"alt"}, "delete") -- Clear the last characters matching `listenText`
             hs.eventtap.keyStrokes(replacementFn()) -- Insert the replacement
         end)

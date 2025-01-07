@@ -58,7 +58,8 @@ alias vimcc='rm ~/.vim-tmp/* ~/.vim-tmp/.*'
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en1"
 alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
-
+alias audio-to-aiff='~/Github/dotfiles/scripts/audio_to_aiff.sh'
+alias syncfiles='python3 ~/GitHub/dotfiles/scripts/syncfiles.py'
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
