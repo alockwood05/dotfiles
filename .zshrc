@@ -1,5 +1,7 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
+# Path to some dotfile scripts
+SCRIPTS_DIR="$HOME/Github/dotfiles/scripts"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -42,14 +44,13 @@ alias ls='ls -p'
 # Better `grep`
 export GREP_OPTIONS='--color=auto'
 
-# brew install grc
 # Colorized `traceroute`, `tail`, `head` (requires prepending command with `grc`)
 [[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" scp sftp ssh
 
-
+alias dark="$SCRIPTS_DIR/toggle_darkmode.sh"
 alias dc='docker-compose'
 # history -E shows timestamps in zsh
 alias hist='history -E | grep '
