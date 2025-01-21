@@ -51,6 +51,7 @@ export GREP_OPTIONS='--color=auto'
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" scp sftp ssh
 
 alias dark="$SCRIPTS_DIR/toggle_darkmode.sh"
+alias summarize_obsidian="python $SCRIPTS_DIR/summarize_obsidian.py"
 alias dc='docker-compose'
 # history -E shows timestamps in zsh
 alias hist='history -E | grep '
